@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PackageDropoff : MonoBehaviour
 {
+
+    public TimerBar bar;
     private PackageStack stack;
 
     private List<PackageColor.countries> countryList = new List<PackageColor.countries>();
@@ -91,6 +93,7 @@ public class PackageDropoff : MonoBehaviour
         if (numRecieved > 0)
         {
             givePackages();
+            bar.AnimateBar();
         }
     }
 
