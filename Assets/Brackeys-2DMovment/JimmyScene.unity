@@ -453,6 +453,30 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7663394895826716877, guid: 2a8197b80c0e59d4d872f9d065fd70d6, type: 3}
   m_PrefabInstance: {fileID: 7663394896492343257}
   m_PrefabAsset: {fileID: 0}
+--- !u!233 &118585830
+HingeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118585827}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 2.5388, y: -1.4286001}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 0
+  m_AngleLimits:
+    m_LowerAngle: 0
+    m_UpperAngle: 359
 --- !u!1 &133372494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,7 +1754,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773513, y: 1}
+    m_SensorSize: {x: 1.7773913, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2114,7 +2138,7 @@ MonoBehaviour:
   maxStackSize: 11
   startingPkg_X: 0.8
   startingPkg_Y: -0.5
-  packageHeight: 0
+  packageHeight: 0.5
   numBlue: 0
   numGreen: 0
   numYellow: 0
@@ -11971,11 +11995,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7663394895826716876, guid: 2a8197b80c0e59d4d872f9d065fd70d6, type: 3}
   m_PrefabInstance: {fileID: 7663394896492343257}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &2042406679 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 7663394895826716878, guid: 2a8197b80c0e59d4d872f9d065fd70d6, type: 3}
-  m_PrefabInstance: {fileID: 7663394896492343257}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5952270853793030110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11983,10 +12002,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 643929440}
     m_Modifications:
-    - target: {fileID: 5952270853516957792, guid: 1f6c018f36e1a2f4fbd7c6751b016c36, type: 3}
-      propertyPath: m_ConnectedRigidBody
-      value: 
-      objectReference: {fileID: 2042406679}
     - target: {fileID: 5952270853516957793, guid: 1f6c018f36e1a2f4fbd7c6751b016c36, type: 3}
       propertyPath: m_Mass
       value: 10

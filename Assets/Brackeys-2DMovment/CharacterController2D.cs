@@ -105,8 +105,17 @@ public class CharacterController2D : MonoBehaviour
 		m_FacingRight = !m_FacingRight;
 
 		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+		/*		Vector3 theScale = transform.localScale;
+				theScale.x *= -1;
+				transform.localScale = theScale;*/
+		if (m_FacingRight)
+        {
+			GameObject.Find("Stack").transform.localPosition = new Vector3(0, 0, 0);
+		} else
+        {
+			GameObject.Find("Stack").transform.localPosition = new Vector3(-1, 0, 0);
+		}
+		
+		gameObject.GetComponent<SpriteRenderer>().flipX = !m_FacingRight;
 	}
 }
