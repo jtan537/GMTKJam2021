@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviour
         XMovement = Mathf.Lerp(XMovement, XInput, acceleration);
         rb.velocity = new Vector2(XMovement * moveSpeed * Time.deltaTime, rb.velocity.y);
         
-        if(Input.GetKey(KeyCode.Space) && groundCheck.isGrounded){
+        if(Input.GetKeyDown(KeyCode.Space) && groundCheck.isGrounded){
+            Debug.Log("jump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
             // Start jump animation
