@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PackageGiver : MonoBehaviour
 {
+    
 
-    [SerializeField] private string country_color;
     // Start is called before the first frame update
     void Start()
     {
