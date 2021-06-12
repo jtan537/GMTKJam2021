@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
             canJump = false;
             Debug.Log("jump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            
         }
             
 
@@ -80,12 +79,12 @@ public class PlayerController : MonoBehaviour
         // Flip player sprite based on direction
         if(XMovement > 0){
             //tr.localScale = new Vector3(1f, 1f, 1f );
-            GameObject.Find("Stack").transform.localPosition = new Vector3(0, 0, 0);
+            GameObject.Find("Stack").transform.localPosition = new Vector3(.4f, .2f, 0);
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         else if(XMovement < 0 ){
             //tr.localScale = new Vector3(-1f, 1f, 1f);
-            GameObject.Find("Stack").transform.localPosition = new Vector3(-1, 0, 0);
+            GameObject.Find("Stack").transform.localPosition = new Vector3(-1.4f, .2f, 0);
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 

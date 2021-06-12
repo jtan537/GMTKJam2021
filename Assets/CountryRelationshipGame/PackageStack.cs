@@ -11,6 +11,8 @@ public class PackageStack : MonoBehaviour
     
     public List<GameObject> stack = new List<GameObject>();
 
+    private bool addedPackage = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +20,31 @@ public class PackageStack : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (addedPackage)
+        {
+            // Make packages heavier at the bottom for better physics (ignore 1st item in the stack, it's the tray not a package)
+            for (int i = 1; i < stack.Count; i++)
+            {
+                // i + 1 to account for tray in the stack
+                if (i + 1 < maxStackSize / 2)
+                {
+                    stack[i].GetComponent<Rigidbody2D>().mass = 20;
+                }
+                else if (i + 1 < 3 * maxStackSize / 4)
+                {
+                    stack[i].GetComponent<Rigidbody2D>().mass = 10;
+                }
+            }
+            addedPackage = false;
+        }
+        
+    }
+
     public void addPackage(PackageColor.countries color)
     {
+        addedPackage = true;
 
         // Add to stack
         if (stack.Count == maxStackSize)
@@ -33,14 +58,7 @@ public class PackageStack : MonoBehaviour
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
         inst.GetComponent<HingeJoint2D>().connectedBody = stack[stack.Count - 1].GetComponent<Rigidbody2D>();
         inst.GetComponent<PackageColor>().setColor(color);
-        if (stack.Count + 1 < maxStackSize / 2)
-        {
-            inst.GetComponent<Rigidbody2D>().mass = 20;
-        }
-        else if (stack.Count + 1 < 3 * maxStackSize / 4)
-        {
-            inst.GetComponent<Rigidbody2D>().mass = 10;
-        }
+        
         stack.Add(inst);
 
         // Keep track of individual pkg count
