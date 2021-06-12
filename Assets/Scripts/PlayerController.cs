@@ -67,9 +67,14 @@ public class PlayerController : MonoBehaviour
 
         // Flip player sprite based on direction
         if(XMovement > 0){
-            tr.localScale = new Vector3(1f, 1f, 1f );
-        }else if(XMovement < 0 ){
-            tr.localScale = new Vector3(-1f, 1f, 1f);
+            //tr.localScale = new Vector3(1f, 1f, 1f );
+            GameObject.Find("Stack").transform.localPosition = new Vector3(0, 0, 0);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if(XMovement < 0 ){
+            //tr.localScale = new Vector3(-1f, 1f, 1f);
+            GameObject.Find("Stack").transform.localPosition = new Vector3(-1, 0, 0);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
         // Pass y velocity to anim, checks if player is falling
