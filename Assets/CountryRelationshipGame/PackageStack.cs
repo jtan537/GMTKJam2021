@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PackageStack : MonoBehaviour
 {
-    [SerializeField] public int maxStackSize = 10;
+    [SerializeField] public int maxStackSize = 11;
     [SerializeField] private float startingPkg_X, startingPkg_Y, packageHeight;
     
     public List<GameObject> stack = new List<GameObject>();
@@ -27,6 +27,14 @@ public class PackageStack : MonoBehaviour
         inst.transform.parent = gameObject.transform;
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
         inst.GetComponent<PackageColor>().setColor(color);
+        if (stack.Count + 1 < maxStackSize / 2)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 20;
+        }
+        else if (stack.Count + 1 < 3 * maxStackSize / 4)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 10;
+        }
         stack.Add(inst);
     }
     /*    public void addPackage(PackageColor.countries color)
@@ -154,6 +162,13 @@ public class PackageStack : MonoBehaviour
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
 /*        inst.GetComponent<PackageColor>().setColor((PackageColor.countries)Random.Range(0, 4));*/
         inst.GetComponent<PackageColor>().setColor(PackageColor.countries.Blue);
+        if (stack.Count + 1 < maxStackSize / 2)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 20;
+        } else if (stack.Count + 1 < 3 * maxStackSize / 4)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 10;
+        }
         stack.Add(inst);
     }
     public void addRedPackage()
@@ -168,6 +183,14 @@ public class PackageStack : MonoBehaviour
         inst.GetComponent<HingeJoint2D>().connectedBody = stack[stack.Count - 1].GetComponent<Rigidbody2D>();
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
         inst.GetComponent<PackageColor>().setColor(PackageColor.countries.Red);
+        if (stack.Count + 1 < maxStackSize / 2)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 20;
+        }
+        else if (stack.Count + 1 < 3 * maxStackSize / 4)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 10;
+        }
         stack.Add(inst);
     }
     public void addGreenPackage()
@@ -181,6 +204,14 @@ public class PackageStack : MonoBehaviour
         inst.GetComponent<HingeJoint2D>().connectedBody = stack[stack.Count - 1].GetComponent<Rigidbody2D>();
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
         inst.GetComponent<PackageColor>().setColor(PackageColor.countries.Green);
+        if (stack.Count + 1 < maxStackSize / 2)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 20;
+        }
+        else if (stack.Count + 1 < 3 * maxStackSize / 4)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 10;
+        }
         stack.Add(inst);
     }
     public void addYellowPackage()
@@ -195,6 +226,14 @@ public class PackageStack : MonoBehaviour
         inst.GetComponent<HingeJoint2D>().connectedBody = stack[stack.Count - 1].GetComponent<Rigidbody2D>();
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
         inst.GetComponent<PackageColor>().setColor(PackageColor.countries.Yellow);
+        if (stack.Count + 1 < maxStackSize / 2)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 20;
+        }
+        else if (stack.Count + 1 < 3 * maxStackSize / 4)
+        {
+            inst.GetComponent<Rigidbody2D>().mass = 10;
+        }
         stack.Add(inst);
     }
 
