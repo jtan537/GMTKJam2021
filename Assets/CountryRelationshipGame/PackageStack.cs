@@ -6,6 +6,8 @@ public class PackageStack : MonoBehaviour
 {
     [SerializeField] public int maxStackSize = 11;
     [SerializeField] private float startingPkg_X, startingPkg_Y, packageHeight;
+
+    public int numBlue, numGreen, numYellow, numRed;
     
     public List<GameObject> stack = new List<GameObject>();
 
@@ -18,14 +20,18 @@ public class PackageStack : MonoBehaviour
 
     public void addPackage(PackageColor.countries color)
     {
+
+        // Add to stack
         if (stack.Count == maxStackSize)
         {
             return;
         }
         GameObject inst;
         inst = Instantiate(Resources.Load<GameObject>("Prefabs/OtherPackage"));
+        
         inst.transform.parent = gameObject.transform;
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
+        inst.GetComponent<HingeJoint2D>().connectedBody = stack[stack.Count - 1].GetComponent<Rigidbody2D>();
         inst.GetComponent<PackageColor>().setColor(color);
         if (stack.Count + 1 < maxStackSize / 2)
         {
@@ -36,6 +42,24 @@ public class PackageStack : MonoBehaviour
             inst.GetComponent<Rigidbody2D>().mass = 10;
         }
         stack.Add(inst);
+
+        // Keep track of individual pkg count
+        if (color == PackageColor.countries.Green)
+        {
+            numGreen += 1;
+        } 
+        else if (color == PackageColor.countries.Blue)
+        {
+            numBlue += 1;
+        }
+        else if (color == PackageColor.countries.Red)
+        {
+            numRed += 1;
+        }
+        else if (color == PackageColor.countries.Yellow)
+        {
+            numYellow += 1;
+        }
     }
     /*    public void addPackage(PackageColor.countries color)
         {
@@ -95,6 +119,24 @@ public class PackageStack : MonoBehaviour
                 numRemoved += 1;
 
             }
+        }
+
+        // Keep track of individual pkg count
+        if (color == PackageColor.countries.Green)
+        {
+            numGreen = 0;
+        }
+        else if (color == PackageColor.countries.Blue)
+        {
+            numBlue = 0;
+        }
+        else if (color == PackageColor.countries.Red)
+        {
+            numRed = 0;
+        }
+        else if (color == PackageColor.countries.Yellow)
+        {
+            numYellow = 0;
         }
         return numRemoved;
     }
