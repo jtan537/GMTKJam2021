@@ -11,12 +11,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float XMovement = 0;
     public float moveSpeed = 5f;
     public float acceleration = 0.2f;
+
+    [Header("Jumping Variables")]
+    [SerializeField] private GroundCheck groundCheck;
     public float jumpForce = 1f;
+
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        groundCheck = transform.Find("GroundCheck").gameObject.GetComponent<GroundCheck>();;
     }
 
     // Update is called once per frame
@@ -32,7 +37,7 @@ public class PlayerController : MonoBehaviour
         // rb.velocity = new Vector2(XInput * moveSpeed * Time.deltaTime, rb.velocity.y);
 
 
-        if(Input.GetKey(KeyCode.Space)){
+        if(Input.GetKey(KeyCode.Space) && groundCheck.isGrounded){
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
