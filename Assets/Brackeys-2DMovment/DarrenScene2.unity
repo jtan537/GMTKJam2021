@@ -37045,8 +37045,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5501079067852703535, guid: 71fe031b868b5cc45bbb49669ce81ce8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501079067852703535, guid: 71fe031b868b5cc45bbb49669ce81ce8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.905
+      value: -0.743
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71fe031b868b5cc45bbb49669ce81ce8, type: 3}
@@ -37222,7 +37226,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.2
 --- !u!1 &828738996
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,9 +58,10 @@ public class PlayerController : MonoBehaviour
         
         if (canJump)
         {
+            canJump = false;
             Debug.Log("jump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            canJump = false;
+            
         }
             
 
