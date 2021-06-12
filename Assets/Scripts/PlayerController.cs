@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Transform tr;
 
+    private bool canJump = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,11 @@ public class PlayerController : MonoBehaviour
     {
         // Get X axis input
         XInput = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space) && groundCheck.isGrounded)
+        {
+            canJump = true;
+        }
     }
 
     void FixedUpdate(){
@@ -49,13 +56,16 @@ public class PlayerController : MonoBehaviour
         XMovement = Mathf.Lerp(XMovement, XInput, acceleration);
         rb.velocity = new Vector2(XMovement * moveSpeed * Time.deltaTime, rb.velocity.y);
         
-        if(Input.GetKeyDown(KeyCode.Space) && groundCheck.isGrounded){
+        if (canJump)
+        {
             Debug.Log("jump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            canJump = false;
+        }
+            
 
             // Start jump animation
             // anim.SetBool("startingJump", true);
-        }
 
         // Animator code
 
