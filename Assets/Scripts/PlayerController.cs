@@ -19,10 +19,16 @@ public class PlayerController : MonoBehaviour
     [Header("Interactables Variables")]
     [SerializeField] private InteractablesCheck InteractablesCheck;
 
+    [Header("Animation Variables")]
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform tr;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        tr = GetComponent<Transform>();
         groundCheck = transform.Find("GroundCheck").gameObject.GetComponent<GroundCheck>();
         
         // Use interactablesCheck.packageInRange to determine if player can pick up package
@@ -42,9 +48,32 @@ public class PlayerController : MonoBehaviour
         // Movement code
         XMovement = Mathf.Lerp(XMovement, XInput, acceleration);
         rb.velocity = new Vector2(XMovement * moveSpeed * Time.deltaTime, rb.velocity.y);
-
+        
         if(Input.GetKey(KeyCode.Space) && groundCheck.isGrounded){
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            // Start jump animation
+            // anim.SetBool("startingJump", true);
         }
-    }
+
+        // Animator code
+
+        // Check if running animation should play 
+        if(XInput != 0){
+            anim.SetBool("isRunning", true);
+        }else{
+            anim.SetBool("isRunning", false);
+        }
+
+        // Flip player sprite based on direction
+        if(XMovement > 0){
+            tr.localScale = new Vector3(1f, 1f, 1f );
+        }else if(XMovement < 0 ){
+            tr.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
+        // Pass y velocity to anim, checks if player is falling
+        anim.SetFloat("YVelocity", rb.velocity.y);
+        anim.SetBool("touchingGround", groundCheck.isGrounded);
+        }
 }
