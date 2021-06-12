@@ -16,12 +16,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GroundCheck groundCheck;
     public float jumpForce = 1f;
 
-    
+    [Header("Interactables Variables")]
+    [SerializeField] private InteractablesCheck InteractablesCheck;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        groundCheck = transform.Find("GroundCheck").gameObject.GetComponent<GroundCheck>();;
+        groundCheck = transform.Find("GroundCheck").gameObject.GetComponent<GroundCheck>();
+        
+        // Use interactablesCheck.packageInRange to determine if player can pick up package
+        InteractablesCheck = transform.Find("InteractablesCheck").gameObject.GetComponent<InteractablesCheck>();
+
     }
 
     // Update is called once per frame
@@ -32,10 +38,10 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate(){
+
+        // Movement code
         XMovement = Mathf.Lerp(XMovement, XInput, acceleration);
         rb.velocity = new Vector2(XMovement * moveSpeed * Time.deltaTime, rb.velocity.y);
-        // rb.velocity = new Vector2(XInput * moveSpeed * Time.deltaTime, rb.velocity.y);
-
 
         if(Input.GetKey(KeyCode.Space) && groundCheck.isGrounded){
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
