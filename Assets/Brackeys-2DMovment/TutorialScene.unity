@@ -15393,7 +15393,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.38, y: 2.74}
+  m_Size: {x: 1, y: 2.29}
   m_Direction: 0
 --- !u!212 &222717339
 SpriteRenderer:
@@ -16897,7 +16897,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.38, y: 2.74}
+  m_Size: {x: 1, y: 2.29}
   m_Direction: 0
 --- !u!212 &521611948
 SpriteRenderer:
@@ -65067,7 +65067,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.38, y: 2.74}
+  m_Size: {x: 1, y: 2.29}
   m_Direction: 0
 --- !u!212 &1500091167
 SpriteRenderer:
@@ -87641,7 +87641,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.38, y: 2.74}
+  m_Size: {x: 1, y: 2.29}
   m_Direction: 0
 --- !u!212 &1983001873
 SpriteRenderer:
