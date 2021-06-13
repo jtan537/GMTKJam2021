@@ -6,7 +6,6 @@ using DentedPixel;
 public class GuardAI : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    bool isAngry = false;
     bool movingRight = true;
     Transform leftPoint, rightPoint;
     // Start is called before the first frame update
@@ -20,6 +19,7 @@ public class GuardAI : MonoBehaviour
     {
         if (diplomacyPoints < 40f)
         {
+            gameObject.layer = 9;
             if (movingRight)
             {
                 transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
@@ -29,6 +29,9 @@ public class GuardAI : MonoBehaviour
                 transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
             }
+        } else
+        {
+            gameObject.layer = 8;
         }
     }
 

@@ -2715,7 +2715,7 @@ GameObject:
   - component: {fileID: 679312086}
   - component: {fileID: 679312088}
   - component: {fileID: 679312089}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedGuardObject
   m_TagString: Red
   m_Icon: {fileID: 0}

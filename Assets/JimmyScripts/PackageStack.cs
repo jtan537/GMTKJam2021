@@ -17,7 +17,7 @@ public class PackageStack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     private void Update()
@@ -133,6 +133,66 @@ public class PackageStack : MonoBehaviour
                 // 3. Delete the package
                 stack.Remove(pkg);
                 Destroy(pkg);
+
+                numRemoved += 1;
+
+            }
+        }
+
+        // Keep track of individual pkg count and add diplomacy points
+        if (color == PackageColor.countries.Green)
+        {
+            GameManager.diplomacyPoints["Green"] += numRemoved * ptsPerPkg;
+            numGreen = 0;
+        }
+        else if (color == PackageColor.countries.Blue)
+        {
+            GameManager.diplomacyPoints["Blue"] += numRemoved * ptsPerPkg;
+            numBlue = 0;
+        }
+        else if (color == PackageColor.countries.Red)
+        {
+            GameManager.diplomacyPoints["Red"] += numRemoved * ptsPerPkg;
+            numRed = 0;
+        }
+        else if (color == PackageColor.countries.Yellow)
+        {
+            GameManager.diplomacyPoints["Yellow"] += numRemoved * ptsPerPkg;
+            numYellow = 0;
+        }
+        return numRemoved;
+    }
+
+    public int damagePackages(PackageColor.countries color)
+    {
+        int numRemoved = 0;
+        // Ignore bottom tray object
+        for (int i = stack.Count - 1; i > 0; i--)
+        {
+            GameObject pkg = stack[i];
+            if (pkg.GetComponent<PackageColor>().packageColor == color)
+            {
+                // 1. Lower each package above the deleted one, if there are packages above it
+                if (i + 1 < stack.Count)
+                {
+                    for (int j = i + 1; j < stack.Count; j++)
+                    {
+                        Debug.Log("lower");
+                        GameObject lower_pkg = stack[j];
+                        lower_pkg.transform.position = new Vector3(lower_pkg.transform.position.x, lower_pkg.transform.position.y - packageHeight, 0f);
+                    }
+                }
+
+                // 2. Set the hinge joint of the box above deleted to the box below deleted
+                if (i - 1 >= 0 && i + 1 < stack.Count)
+                {
+                    stack[i + 1].GetComponent<HingeJoint2D>().connectedBody = stack[i - 1].GetComponent<Rigidbody2D>();
+                }
+
+
+                // 3. Delete the package from the stack and remove hinge 
+                stack.Remove(pkg);
+                Destroy(pkg.GetComponent<HingeJoint2D>());
 
                 numRemoved += 1;
 

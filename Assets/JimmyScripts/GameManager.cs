@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static Dictionary<string, float> diplomacyPoints = new Dictionary<string, float>();
     public float bPts, gPts, rPts, yPts;
+
+    PackageStack stack;
     // Start is called before the first frame update
     private void Start()
     {
@@ -13,6 +15,9 @@ public class GameManager : MonoBehaviour
         diplomacyPoints.Add("Green", 50f);
         diplomacyPoints.Add("Red", 50f);
         diplomacyPoints.Add("Yellow", 50f);
+
+        stack = GameObject.Find("Stack").GetComponent<PackageStack>();
+        stack.addPackage(PackageColor.countries.Red);
     }
     // Update is called once per frame
     void Update()

@@ -17,7 +17,7 @@ public class TimerBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bar.transform.localScale.x <= 0.05f)
+        if (bar.transform.localScale.x <= 0f)
         {
             if (gameObject.tag == "Blue")
             {
