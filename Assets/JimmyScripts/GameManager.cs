@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static Dictionary<string, float> diplomacyPoints = new Dictionary<string, float>();
+    [SerializeField]
+    List<PackageColor.countries> startingPkgs;
 
     [SerializeField]
     Image loseScreen, winScreen;
@@ -20,7 +22,11 @@ public class GameManager : MonoBehaviour
         diplomacyPoints.Add("Yellow", 50f);
 
         stack = GameObject.Find("Stack").GetComponent<PackageStack>();
-        stack.addPackage(PackageColor.countries.Red);
+        foreach(PackageColor.countries country in startingPkgs)
+        {
+            stack.addPackage(country);
+        }
+        
     }
 
     void checkWinCon()

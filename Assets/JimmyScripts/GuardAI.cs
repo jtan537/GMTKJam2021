@@ -6,7 +6,7 @@ using DentedPixel;
 public class GuardAI : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    bool movingRight = true;
+    public bool movingRight = true;
     Transform leftPoint, rightPoint;
     Animator anim;
     // Start is called before the first frame update
