@@ -18,4 +18,10 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(0);
         winScreen.SetActive(false);
     }
+
+    public void goToTutorial()
+    {
+        SceneManager.LoadScene(0);
+        winScreen.SetActive(false);
+    }
 }
