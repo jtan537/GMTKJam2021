@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
     private bool canJump = false;
 
+    [Header("Particles")]
+    [SerializeField] public GameObject runParticles;
+    [SerializeField] public ParticleSystem jumpParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +39,8 @@ public class PlayerController : MonoBehaviour
         
         // Use interactablesCheck.packageInRange to determine if player can pick up package
         InteractablesCheck = transform.Find("InteractablesCheck").gameObject.GetComponent<InteractablesCheck>();
+
+        // runParticles = GameObject.Find("RunParticles").GetComponent<ParticleSystem>();
 
     }
 
@@ -47,6 +53,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && groundCheck.isGrounded)
         {
             canJump = true;
+            jumpParticles.Play();
         }
     }
 
@@ -59,7 +66,6 @@ public class PlayerController : MonoBehaviour
         if (canJump)
         {
             canJump = false;
-            Debug.Log("jump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             
         }
@@ -71,21 +77,26 @@ public class PlayerController : MonoBehaviour
         // Animator code
 
         // Check if running animation should play 
-        if(XInput != 0){
+        if(XInput != 0){     
+            runParticles.SetActive(true);
+
             anim.SetBool("isRunning", true);
         }else{
             anim.SetBool("isRunning", false);
+            runParticles.SetActive(false);
+
         }
+
 
         // Flip player sprite based on direction
         if(XMovement > 0){
             //tr.localScale = new Vector3(1f, 1f, 1f );
-            GameObject.Find("Stack").transform.localPosition = new Vector3(0, 0, 0);
+            // GameObject.Find("Stack").transform.localPosition = new Vector3(0, 0, 0);
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         else if(XMovement < 0 ){
             //tr.localScale = new Vector3(-1f, 1f, 1f);
-            GameObject.Find("Stack").transform.localPosition = new Vector3(-1, 0, 0);
+            // GameObject.Find("Stack").transform.localPosition = new Vector3(-1, 0, 0);
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
