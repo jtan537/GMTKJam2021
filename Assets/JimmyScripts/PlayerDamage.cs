@@ -36,6 +36,7 @@ public class PlayerDamage : MonoBehaviour
     void applyDamage()
     {
         gameObject.GetComponent<PlayerController>().moveSpeed /= 1.5f;
+        AudioManager.instance.Play("Hit");
         if (stack.stack.Count > 2)
         {
             for (int i = 0; i < numPkgsLose; i++)
@@ -48,7 +49,7 @@ public class PlayerDamage : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isInvincible)
         {

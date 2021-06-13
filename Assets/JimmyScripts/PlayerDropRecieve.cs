@@ -12,6 +12,7 @@ public class PlayerDropRecieve : MonoBehaviour
     {
         if (inDropOffPoint && Input.GetKeyDown(KeyCode.E))
         {
+            
             dropRecievePkg = true;
         }
     }

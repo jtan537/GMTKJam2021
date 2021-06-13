@@ -92,6 +92,7 @@ public class PackageDropoff : MonoBehaviour
         // Only give more packages if the player delivered at least 1 package
         if (numRecieved > 0)
         {
+            AudioManager.instance.Play("PickUp");
             givePackages();
             bar.AnimateBar();
         }
