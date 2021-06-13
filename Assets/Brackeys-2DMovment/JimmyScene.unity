@@ -13994,6 +13994,7 @@ GameObject:
   - component: {fileID: 6635232532901719318}
   - component: {fileID: 1171734772511856393}
   - component: {fileID: 6635232532901719324}
+  - component: {fileID: 6635232532901719325}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14015,6 +14016,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inDropOffPoint: 0
   dropRecievePkg: 0
+--- !u!114 &6635232532901719325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635232532901719323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fadb64e84bfca84a82617cc9ad697f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibilityDurationSeconds: 1.5
+  invincibilityDeltaTime: 0.15
+  isInvincible: 0
+  numPkgsLose: 2
 --- !u!1001 &7663394896492343257
 PrefabInstance:
   m_ObjectHideFlags: 0

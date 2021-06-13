@@ -61,15 +61,12 @@ public class GuardAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rightPoint.position.x);
         if (gameObject.transform.position.x <= leftPoint.position.x)
         {
-            Debug.Log(leftPoint.position.x);
             movingRight = true;
         }
         if (gameObject.transform.position.x >= rightPoint.position.x)
         {
-            Debug.Log(rightPoint.position.x);
             movingRight = false;
         }  
     }

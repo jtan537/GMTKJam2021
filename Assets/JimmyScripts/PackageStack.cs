@@ -163,9 +163,20 @@ public class PackageStack : MonoBehaviour
         return numRemoved;
     }
 
-    public int damagePackages(PackageColor.countries color)
+    // Used in PlayerDamage.cs. Causes player to drop packages in a ragdolly way
+    public void damagePackage(PackageColor.countries color)
     {
-        int numRemoved = 0;
+        // Must always have at least 1 pkg
+        if (stack.Count <= 2)
+        {
+            return;
+        }
+        IEnumerator deletePkg(GameObject pkg)
+        {
+            yield return new WaitForSeconds(4);
+            Destroy(pkg);
+        };
+
         // Ignore bottom tray object
         for (int i = stack.Count - 1; i > 0; i--)
         {
@@ -190,37 +201,14 @@ public class PackageStack : MonoBehaviour
                 }
 
 
-                // 3. Delete the package from the stack and remove hinge 
+                // 3. Ragdoll the pkg, then delete the package from the stack
                 stack.Remove(pkg);
+                pkg.transform.parent = null;
                 Destroy(pkg.GetComponent<HingeJoint2D>());
-
-                numRemoved += 1;
-
+                StartCoroutine(deletePkg(pkg));
+                return;
             }
         }
-
-        // Keep track of individual pkg count and add diplomacy points
-        if (color == PackageColor.countries.Green)
-        {
-            GameManager.diplomacyPoints["Green"] += numRemoved * ptsPerPkg;
-            numGreen = 0;
-        }
-        else if (color == PackageColor.countries.Blue)
-        {
-            GameManager.diplomacyPoints["Blue"] += numRemoved * ptsPerPkg;
-            numBlue = 0;
-        }
-        else if (color == PackageColor.countries.Red)
-        {
-            GameManager.diplomacyPoints["Red"] += numRemoved * ptsPerPkg;
-            numRed = 0;
-        }
-        else if (color == PackageColor.countries.Yellow)
-        {
-            GameManager.diplomacyPoints["Yellow"] += numRemoved * ptsPerPkg;
-            numYellow = 0;
-        }
-        return numRemoved;
     }
 
 
