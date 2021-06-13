@@ -29,9 +29,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public GameObject runParticles;
     [SerializeField] public ParticleSystem jumpParticles;
 
+    [Header("Personal Audio")]
+    [SerializeField] private AudioSource src;
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.instance.Play("LevelTheme");
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
@@ -40,8 +43,7 @@ public class PlayerController : MonoBehaviour
         // Use interactablesCheck.packageInRange to determine if player can pick up package
         InteractablesCheck = transform.Find("InteractablesCheck").gameObject.GetComponent<InteractablesCheck>();
 
-        // runParticles = GameObject.Find("RunParticles").GetComponent<ParticleSystem>();
-
+        src = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -67,6 +69,8 @@ public class PlayerController : MonoBehaviour
         {
             canJump = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            AudioManager.instance.Play("Jump");
+
         }
             
 
@@ -76,14 +80,19 @@ public class PlayerController : MonoBehaviour
         // Animator code
 
         // Check if running animation should play 
-        if(XInput != 0){     
+        if(XInput != 0 && groundCheck.isGrounded){     
             runParticles.SetActive(true);
-
             anim.SetBool("isRunning", true);
+
+            // Play walking SFX
+            if(!src.isPlaying){
+                src.Play();
+            }
         }else{
             anim.SetBool("isRunning", false);
             runParticles.SetActive(false);
 
+            src.Stop();
         }
 
 
