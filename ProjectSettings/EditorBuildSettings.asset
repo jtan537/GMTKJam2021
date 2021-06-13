@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/JimmyScene.unity
     guid: 509c710c677370445a210f7eaa2b9edd
+  - enabled: 1
+    path: Assets/Brackeys-2DMovment/TutorialScene.unity
+    guid: 548efbe8196c7bb41a94d25d70cf82e6
   m_configObjects: {}
