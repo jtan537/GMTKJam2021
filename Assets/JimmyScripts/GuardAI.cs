@@ -8,11 +8,14 @@ public class GuardAI : MonoBehaviour
     public float moveSpeed = 10f;
     bool movingRight = true;
     Transform leftPoint, rightPoint;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         leftPoint = gameObject.transform.parent.transform.Find("LeftPoint");
         rightPoint = gameObject.transform.parent.transform.Find("RightPoint");
+        anim = GetComponent<Animator>();
+
     }
 
     void moveGuard(float diplomacyPoints)
@@ -29,9 +32,11 @@ public class GuardAI : MonoBehaviour
                 transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
             }
+            anim.SetBool("isAngry", true);
         } else
         {
             gameObject.layer = 8;
+            anim.SetBool("isAngry", false);
         }
     }
 
