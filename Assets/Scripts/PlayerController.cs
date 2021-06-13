@@ -56,8 +56,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && groundCheck.isGrounded)
         {
             canJump = true;
-            jumpParticles.Play();
-        }
+            PlayJumpParticles();        }
     }
 
     void FixedUpdate(){
@@ -119,5 +118,9 @@ public class PlayerController : MonoBehaviour
         // Pass y velocity to anim, checks if player is falling
         anim.SetFloat("YVelocity", rb.velocity.y);
         anim.SetBool("touchingGround", groundCheck.isGrounded);
+        }
+
+        public void PlayJumpParticles(){
+            jumpParticles.Play();
         }
 }
