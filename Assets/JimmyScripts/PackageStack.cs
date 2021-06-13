@@ -6,20 +6,45 @@ public class PackageStack : MonoBehaviour
 {
     [SerializeField] public int maxStackSize = 11;
     [SerializeField] private float startingPkg_X, startingPkg_Y, packageHeight;
-
+    [SerializeField] public float ptsPerPkg = 5;
     public int numBlue, numGreen, numYellow, numRed;
     
     public List<GameObject> stack = new List<GameObject>();
+
+    private bool addedPackage = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+       
+    }
+
+    private void Update()
+    {
+        if (addedPackage)
+        {
+            // Make packages heavier at the bottom for better physics (ignore 1st item in the stack, it's the tray not a package)
+            for (int i = 1; i < stack.Count; i++)
+            {
+                // i + 1 to account for tray in the stack
+                if (i + 1 < maxStackSize / 2)
+                {
+                    stack[i].GetComponent<Rigidbody2D>().mass = 20;
+                }
+                else if (i + 1 < 3 * maxStackSize / 4)
+                {
+                    stack[i].GetComponent<Rigidbody2D>().mass = 10;
+                }
+            }
+            addedPackage = false;
+        }
         
     }
 
     public void addPackage(PackageColor.countries color)
     {
+        addedPackage = true;
 
         // Add to stack
         if (stack.Count == maxStackSize)
@@ -33,14 +58,7 @@ public class PackageStack : MonoBehaviour
         inst.transform.localPosition = new Vector3(startingPkg_X, startingPkg_Y + packageHeight * stack.Count, 0f);
         inst.GetComponent<HingeJoint2D>().connectedBody = stack[stack.Count - 1].GetComponent<Rigidbody2D>();
         inst.GetComponent<PackageColor>().setColor(color);
-        if (stack.Count + 1 < maxStackSize / 2)
-        {
-            inst.GetComponent<Rigidbody2D>().mass = 20;
-        }
-        else if (stack.Count + 1 < 3 * maxStackSize / 4)
-        {
-            inst.GetComponent<Rigidbody2D>().mass = 10;
-        }
+        
         stack.Add(inst);
 
         // Keep track of individual pkg count
@@ -121,24 +139,76 @@ public class PackageStack : MonoBehaviour
             }
         }
 
-        // Keep track of individual pkg count
+        // Keep track of individual pkg count and add diplomacy points
         if (color == PackageColor.countries.Green)
         {
+            GameManager.diplomacyPoints["Green"] += numRemoved * ptsPerPkg;
             numGreen = 0;
         }
         else if (color == PackageColor.countries.Blue)
         {
+            GameManager.diplomacyPoints["Blue"] += numRemoved * ptsPerPkg;
             numBlue = 0;
         }
         else if (color == PackageColor.countries.Red)
         {
+            GameManager.diplomacyPoints["Red"] += numRemoved * ptsPerPkg;
             numRed = 0;
         }
         else if (color == PackageColor.countries.Yellow)
         {
+            GameManager.diplomacyPoints["Yellow"] += numRemoved * ptsPerPkg;
             numYellow = 0;
         }
         return numRemoved;
+    }
+
+    // Used in PlayerDamage.cs. Causes player to drop packages in a ragdolly way
+    public void damagePackage(PackageColor.countries color)
+    {
+        // Must always have at least 1 pkg
+        if (stack.Count <= 2)
+        {
+            return;
+        }
+        IEnumerator deletePkg(GameObject pkg)
+        {
+            yield return new WaitForSeconds(4);
+            Destroy(pkg);
+        };
+
+        // Ignore bottom tray object
+        for (int i = stack.Count - 1; i > 0; i--)
+        {
+            GameObject pkg = stack[i];
+            if (pkg.GetComponent<PackageColor>().packageColor == color)
+            {
+                // 1. Lower each package above the deleted one, if there are packages above it
+                if (i + 1 < stack.Count)
+                {
+                    for (int j = i + 1; j < stack.Count; j++)
+                    {
+                        Debug.Log("lower");
+                        GameObject lower_pkg = stack[j];
+                        lower_pkg.transform.position = new Vector3(lower_pkg.transform.position.x, lower_pkg.transform.position.y - packageHeight, 0f);
+                    }
+                }
+
+                // 2. Set the hinge joint of the box above deleted to the box below deleted
+                if (i - 1 >= 0 && i + 1 < stack.Count)
+                {
+                    stack[i + 1].GetComponent<HingeJoint2D>().connectedBody = stack[i - 1].GetComponent<Rigidbody2D>();
+                }
+
+
+                // 3. Ragdoll the pkg, then delete the package from the stack
+                stack.Remove(pkg);
+                pkg.transform.parent = null;
+                Destroy(pkg.GetComponent<HingeJoint2D>());
+                StartCoroutine(deletePkg(pkg));
+                return;
+            }
+        }
     }
 
 
