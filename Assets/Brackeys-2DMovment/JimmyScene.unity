@@ -14028,8 +14028,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fadb64e84bfca84a82617cc9ad697f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invincibilityDurationSeconds: 1.5
-  invincibilityDeltaTime: 0.15
+  invincibilityDurationSeconds: 2
+  invincibilityDeltaTime: 0.2
   isInvincible: 0
   numPkgsLose: 2
 --- !u!1001 &7663394896492343257

@@ -35,7 +35,7 @@ public class PlayerDamage : MonoBehaviour
 
     void applyDamage()
     {
-        gameObject.GetComponent<PlayerController>().moveSpeed /= 2;
+        gameObject.GetComponent<PlayerController>().moveSpeed /= 1.5f;
         if (stack.stack.Count > 2)
         {
             for (int i = 0; i < numPkgsLose; i++)

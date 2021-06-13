@@ -112,6 +112,15 @@ public class PackageDropoff : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            Debug.Log("Left Dropoff Point");
+            GameObject.FindObjectOfType<PlayerDropRecieve>().inDropOffPoint = false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

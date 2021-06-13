@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static Dictionary<string, float> diplomacyPoints = new Dictionary<string, float>();
-    public float bPts, gPts, rPts, yPts;
 
     PackageStack stack;
     // Start is called before the first frame update
@@ -19,13 +18,26 @@ public class GameManager : MonoBehaviour
         stack = GameObject.Find("Stack").GetComponent<PackageStack>();
         stack.addPackage(PackageColor.countries.Red);
     }
+
+    void checkWinCon()
+    {
+        if (diplomacyPoints["Blue"] >= 80f && diplomacyPoints["Green"] >= 80f && diplomacyPoints["Red"] >= 80f && diplomacyPoints["Yellow"] >= 80f)
+        {
+            Debug.Log("WIN GAME!");
+        }
+    }
+
+    void checkLoseCon()
+    {
+        if (diplomacyPoints["Blue"] <= 0f || diplomacyPoints["Green"] <= 0f || diplomacyPoints["Red"] <= 0f && diplomacyPoints["Yellow"] <= 0f)
+        {
+            Debug.Log("LOSE GAME!");
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        //Debug.LogError(bluePts);
-/*        foreach (KeyValuePair<string,float> country in diplomacyPoints)
-        {
-
-        }*/
+        checkLoseCon();
+        checkWinCon();
     }
 }
