@@ -29,6 +29,7 @@ public class TimerBar : MonoBehaviour
             }
             else if (gameObject.tag == "Red")
             {
+               
                 GameManager.diplomacyPoints["Red"] -= 20f;
             }
             else if (gameObject.tag == "Yellow")
