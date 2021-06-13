@@ -6,7 +6,7 @@ public class PackageStack : MonoBehaviour
 {
     [SerializeField] public int maxStackSize = 11;
     [SerializeField] private float startingPkg_X, startingPkg_Y, packageHeight;
-
+    [SerializeField] public float ptsPerPkg = 5;
     public int numBlue, numGreen, numYellow, numRed;
     
     public List<GameObject> stack = new List<GameObject>();
@@ -139,21 +139,25 @@ public class PackageStack : MonoBehaviour
             }
         }
 
-        // Keep track of individual pkg count
+        // Keep track of individual pkg count and add diplomacy points
         if (color == PackageColor.countries.Green)
         {
+            GameManager.diplomacyPoints["Green"] += numRemoved * ptsPerPkg;
             numGreen = 0;
         }
         else if (color == PackageColor.countries.Blue)
         {
+            GameManager.diplomacyPoints["Blue"] += numRemoved * ptsPerPkg;
             numBlue = 0;
         }
         else if (color == PackageColor.countries.Red)
         {
+            GameManager.diplomacyPoints["Red"] += numRemoved * ptsPerPkg;
             numRed = 0;
         }
         else if (color == PackageColor.countries.Yellow)
         {
+            GameManager.diplomacyPoints["Yellow"] += numRemoved * ptsPerPkg;
             numYellow = 0;
         }
         return numRemoved;
