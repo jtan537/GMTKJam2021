@@ -20,7 +20,7 @@ public class GuardAI : MonoBehaviour
 
     void moveGuard(float diplomacyPoints)
     {
-        if (diplomacyPoints < 40f)
+        if (diplomacyPoints < 60f)
         {
             gameObject.layer = 9;
             if (movingRight)
