@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     private bool canJump = false;
 
     [Header("Particles")]
-    [SerializeField] public GameObject runParticles;
+    [SerializeField] public GameObject runParticlesR;
+    [SerializeField] public GameObject runParticlesL;
     [SerializeField] public ParticleSystem jumpParticles;
 
     [Header("Personal Audio")]
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
         // Check if running animation should play 
         if(XInput != 0 && groundCheck.isGrounded){     
-            runParticles.SetActive(true);
+            //runParticles.SetActive(true);
             anim.SetBool("isRunning", true);
 
             // Play walking SFX
@@ -90,7 +91,8 @@ public class PlayerController : MonoBehaviour
             }
         }else{
             anim.SetBool("isRunning", false);
-            runParticles.SetActive(false);
+            runParticlesR.SetActive(false);
+			runParticlesL.SetActive(false);
 
             src.Stop();
         }
@@ -99,18 +101,20 @@ public class PlayerController : MonoBehaviour
         // Flip player sprite based on direction
         if(XMovement > 0){
             //tr.localScale = new Vector3(1f, 1f, 1f );
-
+			runParticlesR.SetActive(true);
+			runParticlesL.SetActive(false);
             GameObject.Find("Stack").transform.localPosition = new Vector3(.4f, .2f, 0);
-
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
+			
         }
         else if(XMovement < 0 ){
             //tr.localScale = new Vector3(-1f, 1f, 1f);
-
+			runParticlesL.SetActive(true);
+			runParticlesR.SetActive(false);
             GameObject.Find("Stack").transform.localPosition = new Vector3(-1.4f, .2f, 0);
-
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
+
 
         // Pass y velocity to anim, checks if player is falling
         anim.SetFloat("YVelocity", rb.velocity.y);
