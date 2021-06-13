@@ -139,25 +139,29 @@ public class PackageStack : MonoBehaviour
             }
         }
 
-        // Keep track of individual pkg count and add diplomacy points
+        // Keep track of individual pkg count and add diplomacy points, and reset timer
         if (color == PackageColor.countries.Green)
         {
             GameManager.diplomacyPoints["Green"] += numRemoved * ptsPerPkg;
+           // GameObject.Find("GreenTimer").GetComponent<TimerBar>().AnimateBar();
             numGreen = 0;
         }
         else if (color == PackageColor.countries.Blue)
         {
             GameManager.diplomacyPoints["Blue"] += numRemoved * ptsPerPkg;
+           // GameObject.Find("BlueTimer").GetComponent<TimerBar>().AnimateBar();
             numBlue = 0;
         }
         else if (color == PackageColor.countries.Red)
         {
             GameManager.diplomacyPoints["Red"] += numRemoved * ptsPerPkg;
+         //   GameObject.Find("RedTimer").GetComponent<TimerBar>().AnimateBar();
             numRed = 0;
         }
         else if (color == PackageColor.countries.Yellow)
         {
             GameManager.diplomacyPoints["Yellow"] += numRemoved * ptsPerPkg;
+          //  GameObject.Find("YellowTimer").GetComponent<TimerBar>().AnimateBar();
             numYellow = 0;
         }
         return numRemoved;
